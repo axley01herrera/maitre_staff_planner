@@ -72,7 +72,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="text-center text-muted p-4">
-                                <p class="mb-0">&copy; <script>document.write(new Date().getFullYear())</script> Axley Herrera</p>
+                                <p class="mb-0">&copy; <script>document.write(new Date().getFullYear())</script></p>
                             </div>
                         </div>
                     </div>
