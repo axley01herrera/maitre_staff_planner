@@ -14,6 +14,7 @@ $lang['log_in'] = 'Entrar';
 $lang['recover_password'] = 'Recuperar Contraseña';
 $lang['you_do_not_have_an_account'] = 'No tienes cuenta';
 $lang['signup'] = 'Resgístrate';
+$lang['required'] = 'Requerido';
 $lang['invalid_email'] = 'Email no válido';
 $lang['write_your_email'] = 'Escriba su email';
 $lang['send_instructions'] = 'Enviar Instruciones';
