@@ -59,5 +59,33 @@ class Authentication extends BaseController
 
         return view('authentication/layout', $data);
     }
+
+    public function signup()
+    {
+        $data = array();
+        $data['pageTitle'] = lang('Text.recover_password');
+        $data['route'] = 'Authentication/signup';
+        $data['page'] = 'authentication/signup';
+        $data['textButtonSubmit'] = lang('Text.save');
+        $data['language'] = $this->request->getLocale();
+
+        return view('authentication/layout', $data);
+    }
+
+    public function showTerm()
+    {
+        $data = array();
+        $data['pageTitle'] = lang('Text.terms_and_conditions');
+
+        return view('modals/simpleModal', $data);
+    }
+
+    public function showPrivacyPolicy()
+    {
+        $data = array();
+        $data['pageTitle'] = lang('Text.privacy_policy');
+
+        return view('modals/simpleModal', $data);
+    }
    
 }

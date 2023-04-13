@@ -19,14 +19,14 @@ $lang['invalid_email'] = 'Invalid Email';
 $lang['write_your_email'] = 'Write your email';
 $lang['send_instructions'] = 'Send Instructions';
 $lang['back'] = 'Back';
-
-
-
-
-
-
-
-
-
+$lang['save'] = 'Save';
+$lang['fill_the_form'] = 'Fill the form';
+$lang['i_have_read_i_accept_the'] = 'I have read, I accept the';
+$lang['terms'] = 'Terms';
+$lang['and'] = 'and';
+$lang['privacy_policy'] = 'Privacy Policy';
+$lang['terms_and_conditions'] = 'Terms and Conditions';
+$lang['close'] = 'Close';
+$lang['you_must_accept_the_terms_and_privacy_policy'] = 'You must accept the terms and privacy policy';
 
 return $lang;

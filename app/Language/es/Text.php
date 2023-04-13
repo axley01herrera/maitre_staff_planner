@@ -19,5 +19,14 @@ $lang['invalid_email'] = 'Email no válido';
 $lang['write_your_email'] = 'Escriba su email';
 $lang['send_instructions'] = 'Enviar Instruciones';
 $lang['back'] = 'Atrás';
+$lang['save'] = 'Guardar';
+$lang['fill_the_form'] = 'Rellene el formulario';
+$lang['i_have_read_i_accept_the'] = 'He leído, acepto los';
+$lang['terms'] = 'Términos';
+$lang['and'] = 'y';
+$lang['privacy_policy'] = 'Pólitica de Privacidad';
+$lang['terms_and_conditions'] = 'Términos y Condiciones';
+$lang['close'] = 'Cerrar';
+$lang['you_must_accept_the_terms_and_privacy_policy'] = 'Debe acceptar términos y política de privacidad';
 
 return $lang;

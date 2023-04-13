@@ -1,4 +1,5 @@
 <script>
+
     function validateEmailFormat() {
 
         let response = 1;
@@ -59,4 +60,5 @@
         $(this).removeClass('is-invalid');
         $('#msg-' + $(this).attr('id')).html('');
     });
+    
 </script>

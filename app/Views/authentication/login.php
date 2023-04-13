@@ -18,7 +18,7 @@
         </a>
     </div>
     <div class="mt-5 text-center text-muted">
-        <p><?php echo lang('Text.you_do_not_have_an_account');?>? <a style="text-decoration: none;" href="#" class="fw-medium text-primary"> <?php echo lang('Text.signup');?> </a></p>
+        <p><?php echo lang('Text.you_do_not_have_an_account');?>? <a style="text-decoration: none;" href="<?php echo base_url('Authentication/signup')?>" class="fw-medium text-primary"> <?php echo lang('Text.signup');?> </a></p>
     </div>
 </div>
 
