@@ -28,5 +28,12 @@ $lang['privacy_policy'] = 'Privacy Policy';
 $lang['terms_and_conditions'] = 'Terms and Conditions';
 $lang['close'] = 'Close';
 $lang['you_must_accept_the_terms_and_privacy_policy'] = 'You must accept the terms and privacy policy';
+$lang['success_registration_msg'] = 'Registration created successfully, go to your email to activate your account';
+$lang['global_error_msg'] = 'An error has ocurred';
+$lang['dulicate_client_msg'] = 'We already have a registered customer with this email';
 
+# EMAIL ACTIVATE ACOUNT
+$lang['ac_welcome_msg'] = 'Thank you for registering in our application, you are just one step away from managing your workforce like never before. Click on the link below to activate your account.';
+$lang['ac_text_btn_activate'] = 'Activate Account';
+$lang['ac_footer_msg'] = 'If you are receiving this email it is because you have filled out our registration form. If it has not been you who has carried out said action, we appreciate that you do not click on the activation link.';
 return $lang;

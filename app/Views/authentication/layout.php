@@ -31,38 +31,42 @@
             <div class="container">
                 <div class="d-flex flex-column min-vh-100 px-3 pt-4">
                     <nav class="navbar navbar-expand-lg" style="position: top; background-color: #ffffff;">
-                        <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0 ">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-success" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?php 
-                                        if($language == 'es')
-                                        {
-                                    ?>
-                                            <img src="<?php echo base_url('assets/images/flags/spain.jpg');?>" alt="ES" class="img-fluid" width="25px">
-                                    <?php 
-                                        }
-                                        else
-                                        {
-                                    ?>
-                                            <img src="<?php echo base_url('assets/images/flags/us.jpg');?>" alt="EN" class="img-fluid" width="25px">
-                                    <?php
-                                        }
-                                    ?>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item locale" href="<?php echo base_url($route).'?language=es';?>">
-                                            <img src="<?php echo base_url('assets/images/flags/spain.jpg');?>" alt="ES" class="img-fluid" width="25px"> <?php echo lang('Text.spanish');?>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item locale" href="<?php echo base_url($route).'?language=en';?>">
-                                            <img src="<?php echo base_url('assets/images/flags/us.jpg');?>" alt="EN" class="img-fluid" width="25px"> <?php echo lang('Text.english');?>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <div class="container-fluid">
+                            <h2 class="text-primary fw-bolder">MITRE STAFF PLANNER</h2>
+                            <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0 ">
+                            
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-success" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <?php 
+                                            if($language == 'es')
+                                            {
+                                        ?>
+                                                <img src="<?php echo base_url('assets/images/flags/spain.jpg');?>" alt="ES" class="img-fluid" width="50px">
+                                        <?php 
+                                            }
+                                            else
+                                            {
+                                        ?>
+                                                <img src="<?php echo base_url('assets/images/flags/us.jpg');?>" alt="EN" class="img-fluid" width="50px">
+                                        <?php
+                                            }
+                                        ?>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item locale" href="<?php echo base_url($route).'?language=es';?>">
+                                                <img src="<?php echo base_url('assets/images/flags/spain.jpg');?>" alt="ES" class="img-fluid" width="25px"> <?php echo lang('Text.spanish');?>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item locale" href="<?php echo base_url($route).'?language=en';?>">
+                                                <img src="<?php echo base_url('assets/images/flags/us.jpg');?>" alt="EN" class="img-fluid" width="25px"> <?php echo lang('Text.english');?>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </nav>
                     <div class="row justify-content-center my-auto">
                         <div class="col-md-8 col-lg-6 col-xl-4">

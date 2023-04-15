@@ -17,7 +17,10 @@
             <p id="msg-cbx-term" class="text-danger text-center"></p>
         </div>
     </div>
-    <?php echo view('authentication/component/btnSubmit'); ?>
+    <?php 
+        echo view('authentication/component/btnSubmit'); 
+        echo view('authentication/component/backButton');
+    ?>
 </div>
 
 <script>
@@ -30,14 +33,23 @@
 
         if(resultValidateEmailFormat == 0 && resultValidateRequiredFieldValues == 0 && resultCheckAcceptTerms == 0) {
 
+            $('#button-submit').attr('disabled', true);
+            $('#spinner-button-submit').removeAttr('hidden');
+
             $.ajax({
 
                 type: "post",
-                url: "<?php echo base_url('Authentication/signup');?>",
-                data: {post},
+                url: "<?php echo base_url('Authentication/create');?>",
+                data: {
+                    'language' : '<?php echo $language;?>',
+                    'post': {
+                        email: $('#input-email').val(),
+                        password: $('#input-password').val()
+                    }
+                },
                 dataType: "json",
                 
-            }).done(function(jsonResponse) {
+            }).done(function(jsonResponse) { console.log(jsonResponse)
 
                 switch(jsonResponse.error) {
 
@@ -48,7 +60,7 @@
                             hideClass: {popup: 'animate__animated animate__fadeOutUp'},
                             icon: 'success',
                             showConfirmButton: true,
-                            confirmButtonText: "<?php echo lang('Button.close')?>",
+                            confirmButtonText: "<?php echo lang('Text.close')?>",
                             confirmButtonColor: '#6c757d',
                         });
                     break
@@ -66,10 +78,13 @@
                     break
                 }
 
+                $('#button-submit').removeAttr('disabled');
+                $('#spinner-button-submit').attr('hidden', true);
+
             }).fail(function(error) {
 
                 Swal.fire({
-                    title: "<?php echo lang('Error.title'); ?>",
+                    title: "<?php echo lang('Text.global_error_msg'); ?>",
                     showClass: {popup: 'animate__animated animate__fadeInDown'},
                     hideClass: {popup: 'animate__animated animate__fadeOutUp'},
                     position: 'top-end',
@@ -77,6 +92,9 @@
                     showConfirmButton: false,
                     timer: 1500
                 });
+
+                $('#button-submit').removeAttr('disabled');
+                $('#spinner-button-submit').attr('hidden', true);
 
             });
         }

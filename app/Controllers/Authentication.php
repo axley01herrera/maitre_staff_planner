@@ -87,5 +87,59 @@ class Authentication extends BaseController
 
         return view('modals/simpleModal', $data);
     }
+
+    public function create()
+    {
+        $response = array();
+        $response['error'] = '';
+        $response['msg'] = '';
+
+        $today = getdate();
+        $formData = $this->request->getPost('post');
+
+        $data = array();
+        $data['email'] = trim($formData['email']);
+        $data['password'] = password_hash(trim($formData['password']), PASSWORD_DEFAULT);
+        $data['token'] = md5(uniqid().$formData['email']);
+        $data['lang'] = $this->request->getLocale();
+        $data['registrationDate'] = date('Y-m-d', $today[0]);
+
+        $resultGetClient = $this->modelAuthentication->getClientBy('email', $data['email']);
+
+        if(empty($resultGetClient))
+        {
+            $resultCreate = $this->modelAuthentication->createRecord($data);
+
+            if($resultCreate['error'] == 0)
+            {
+                $email = array();
+                $email['barner'] = 'MAITRE STAFF PLANNER';
+                $email['welcomeMsg'] = lang('Text.ac_welcome_msg');
+                $email['btnText'] = lang('Text.ac_text_btn_activate');
+                $email['footerMsg'] = lang('Text.ac_footer_msg');
+
+                $this->email->setFrom('info@grupoahvsolucionesinformaticas.es', 'MAITRE STAFF PLANNER');
+                $this->email->setTo($formData['email']);
+                $this->email->setSubject('MAITRE STAFF PLANNER');
+                $this->email->setMessage(view('email/activateAccount', $email));
+                $this->email->send();
+
+                $response['error'] = 0;
+                $response['msg'] = lang('Text.success_registration_msg');
+            }
+            else
+            {
+                $response['error'] = 1;
+                $response['msg'] = lang('Text.global_error_msg');
+            }
+        }
+        else 
+        {
+            $response['error'] = 1;
+            $response['msg'] = lang('Text.dulicate_client_msg');
+        }
+
+        return json_encode($response);
+    }
    
 }
