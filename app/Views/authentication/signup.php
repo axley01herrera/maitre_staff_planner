@@ -89,10 +89,11 @@
                             showConfirmButton: false,
                             timer: 3500
                         });
+
+                        $('#button-submit').removeAttr('disabled');
                     break
                 }
 
-                $('#button-submit').removeAttr('disabled');
                 $('#spinner-button-submit').attr('hidden', true);
 
             }).fail(function(error) {

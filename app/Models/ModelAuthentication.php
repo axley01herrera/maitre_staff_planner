@@ -30,6 +30,8 @@ class ModelAuthentication extends Model
     public function createClient($data)
     {
         $result = array();
+        $result['error'] = '';
+        $result['id'] = '';
 
         $query = $this->db->table('client')
         ->insert($data);
@@ -40,19 +42,30 @@ class ModelAuthentication extends Model
             $result['id'] = $query->connID->insert_id;
         }
         else
-        {
-            $result['error'] = 1;
-        }
+          $result['error'] = 1;
         
         return $result;
     }
 
     public function activateAccountProcess($token)
     {
-        $data = array('token' => '', 'emailVerified' => '1');
+        $data = array();
+        $data['token'] = '';
+        $data['emailVerified'] = 1;
+        $data['access'] = 1;
     
         $query = $this->db->table('client')
         ->where('token', $token)
+        ->update($data);
+
+        return $query;
+    }
+
+    public function setClientToken($id, $data)
+    {
+        
+        $query = $this->db->table('client')
+        ->where('id', $id)
         ->update($data);
 
         return $query;

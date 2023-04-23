@@ -159,5 +159,70 @@ class Authentication extends BaseController
         else
             return view('errorPages/error', $data);
     }
+
+    public function createNewPasswordEmail()
+    {
+        $response = array();
+        $response['error'] = '';
+        $response['msg'] = '';
+        
+        $formData = $this->request->getPost('post');
+        $language = $this->request->getLocale();
+        $verifyExistEmail = $this->modelAuthentication->getClientBy('email', $formData['email']);
+        
+        if(!empty($verifyExistEmail))
+        {
+            $data = array();
+            $data['token'] =  md5(uniqid().$formData['email']);
+
+            $resultSetToken = $this->modelAuthentication->setClientToken($verifyExistEmail[0]['id'], $data);
+
+            if($resultSetToken == true)
+            {
+                $email = array();
+                $email['info'] = lang('Text.rp_info_msg');
+                $email['btnText'] = lang('Text.rp_text_btn_activate');
+                $email['footerMsg'] = lang('Text.rp_footer_msg');
+                $email['link'] = base_url('Authentication/createNewPassword').'?token='.$data['token'].'&language='.$language;
+
+                $this->email->setFrom('info@grupoahvsolucionesinformaticas.es', 'MAITRE STAFF PLANNER');
+                $this->email->setTo($formData['email']);
+                $this->email->setSubject('MAITRE STAFF PLANNER');
+                $this->email->setMessage(view('email/recoverPassword', $email));
+                $resultSendEmail = $this->email->send();
+
+                if($resultSendEmail == true)
+                {
+                    $response['error'] = 0;
+                    $response['msg'] = lang('Text.success_send_email_create_new_password');
+                    $response['resultSendEmail'] = $resultSendEmail;
+                }
+                else
+                {
+                    $response['error'] = 1;
+                    $response['msg'] = lang('Text.global_error_msg');
+                    $response['devMsg'] = 'error send email';
+                }
+            }
+            else
+            {
+                $response['error'] = 1;
+                $response['msg'] = lang('Text.global_error_msg');
+                $response['devMsg'] = 'error set client token';
+            }
+        }
+        else
+        {
+            $response['error'] = 1;
+            $response['msg'] = lang('Text.email_not_found_msg');
+        }
+
+        return json_encode($response);
+    }
+
+    public function createNewPassword()
+    {
+        
+    }
    
 }
