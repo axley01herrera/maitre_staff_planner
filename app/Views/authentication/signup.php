@@ -13,7 +13,7 @@
     ?>
     <div class="row mt-2 mb-2">
         <div class="col-12">
-            <input id="cbx-term" type="checkbox"> <?php echo lang('Text.i_have_read_i_accept_the');?> <a id="show-term" href="#"><?php echo lang('Text.terms')?></a> <?php echo lang('Text.and');?> <a id="show-privacy-policy" href="#"><?php echo lang('Text.privacy_policy')?></a>
+            <input id="cbx-term" type="checkbox" value="0"> <?php echo lang('Text.i_have_read_i_accept_the');?> <a id="show-term" href="#"><?php echo lang('Text.terms')?></a> <?php echo lang('Text.and');?> <a id="show-privacy-policy" href="#"><?php echo lang('Text.privacy_policy')?></a>
             <p id="msg-cbx-term" class="text-danger text-center"></p>
         </div>
     </div>
@@ -49,7 +49,7 @@
                 },
                 dataType: "json",
                 
-            }).done(function(jsonResponse) { console.log(jsonResponse)
+            }).done(function(jsonResponse) {
 
                 switch(jsonResponse.error) {
 
@@ -60,9 +60,23 @@
                             hideClass: {popup: 'animate__animated animate__fadeOutUp'},
                             icon: 'success',
                             showConfirmButton: true,
-                            confirmButtonText: "<?php echo lang('Text.close')?>",
+                            confirmButtonText: "<?php echo lang('Text.close');?>",
                             confirmButtonColor: '#6c757d',
                         });
+
+                        if(jsonResponse.resultSendEmail != true) {
+
+                            Swal.fire({
+                                title: jsonResponse.msg,
+                                showClass: {popup: 'animate__animated animate__fadeInDown'},
+                                hideClass: {popup: 'animate__animated animate__fadeOutUp'},
+                                icon: 'success',
+                                showConfirmButton: true,
+                                confirmButtonText: "<?php echo lang('Text.error_send_email_activation');?>",
+                                confirmButtonColor: '#6c757d',
+                            });
+
+                        }
                     break
 
                     case 1:
@@ -166,11 +180,22 @@
         
     });
 
+    $('#cbx-term').on('click', function () {
+        
+        let value = $(this).val(); 
+
+        if(value == '0')
+            $(this).val('1');
+        else
+            $(this).val('0');
+    });
+
     function checkAcceptTerms() {
 
         let response = '';
+        let value = $('#cbx-term').val();
 
-        if($('#cbx-term').prop('checked')) 
+        if(value == '1') 
         {
             $('#msg-cbx-term').html("");
             response = 0;
@@ -178,7 +203,7 @@
         else
         {
             $('#msg-cbx-term').html("<?php echo lang('Text.you_must_accept_the_terms_and_privacy_policy');?>");
-            response = 0;
+            response = 1;
         } 
                 
         return response;

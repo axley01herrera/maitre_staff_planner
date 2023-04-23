@@ -5,7 +5,7 @@
         <title>Maitre Staff Planner | <?php echo $pageTitle;?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Software" name="description" />
-        <meta content="Axley Herrera Vazquez" name="author" />
+        <meta content="Axley Herrera" name="author" />
 
         <!-- APP ICON -->
         <link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon.ico');?>">
@@ -14,8 +14,8 @@
         <link href="<?php echo base_url('assets/css/bootstrap.min.css');?>" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/css/icons.min.css');?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/css/app.min.css');?>" id="app-style" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="<?php echo base_url('assets/libs/animate/animate.css');?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/libs/sweetalert/sweetalert2.css');?>">
+        <link href="<?php echo base_url('assets/libs/animate/animate.css');?>" rel="stylesheet">
+        <link  href="<?php echo base_url('assets/libs/sweetalert/sweetalert2.css');?>" rel="stylesheet">
 
         <!-- JS -->
         <script src="<?php echo base_url('assets/libs/jquery.js');?>"></script>
@@ -32,7 +32,7 @@
                 <div class="d-flex flex-column min-vh-100 px-3 pt-4">
                     <nav class="navbar navbar-expand-lg" style="position: top; background-color: #ffffff;">
                         <div class="container-fluid">
-                            <h2 class="text-primary fw-bolder">MITRE STAFF PLANNER</h2>
+                            <h2 class="text-primary fw-bolder">MAITRE STAFF PLANNER</h2>
                             <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0 ">
                             
                                 <li class="nav-item dropdown">

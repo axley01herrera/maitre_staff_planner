@@ -23,6 +23,25 @@
 </div>
 
 <script>
+
+    $(document).ready(function () {
+
+        let show_msg_success_activation = '<?php echo $show_msg_success_activation;?>';
+
+        if(show_msg_success_activation == 1) {
+
+            Swal.fire({
+                title: '<?php echo lang('Text.success_activation_msg');?>',
+                showClass: {popup: 'animate__animated animate__fadeInDown'},
+                hideClass: {popup: 'animate__animated animate__fadeOutUp'},
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonText: "<?php echo lang('Text.close');?>",
+                confirmButtonColor: '#6c757d',
+            });
+        }
+    });
+
     $('#button-submit').on('click', function () {
 
         let formValidateEmailFormat = validateEmailFormat();
@@ -31,18 +50,18 @@
         if(formValidateEmailFormat == 0 && formValidateRequiredFieldValues == 0) {
 
             $('#button-submit').attr('disabled', true);
-            $('#spinner-button-submit').removeAttr('hidden');
-
-            let post = {
-                email: $('#input-email').val(),
-                password: $('#input-password').val(),
-            }
+            $('#spinner-button-submit').removeAttr('hidden'); 
 
             $.ajax({
 
                 type: "post",
                 url: "<?php echo base_url('Authentication/login')?>",
-                data: {post},
+                data: {
+                    'post': {
+                        email: $('#input-email').val(),
+                        password: $('#input-password').val(),
+                    }
+                },
                 dataType: "json",
 
             }).done(function(jsonResponse) {
@@ -89,4 +108,5 @@
             });
         }
     });
+
 </script>

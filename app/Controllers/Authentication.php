@@ -21,19 +21,10 @@ class Authentication extends BaseController
         $this->session->set('id', '');
         $this->session->set('email', '');
         $this->session->set('status', '');
+        $this->session->destroy();
 
-        # SET LANGUAJE
-        if(empty($this->request->getPostGet('language')))
-        {
-            $browserLang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-
-            if($browserLang == 'es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3')
-                $this->request->setLocale('es');
-            else
-                $this->request->setLocale('en');
-        }
-        else
-            $this->request->setLocale($this->request->getPostGet('language'));
+        helper('Site');
+        setLanguage($this->request->getPostGet('language'));
     }
 
     public function index()
@@ -44,6 +35,7 @@ class Authentication extends BaseController
         $data['page'] = 'authentication/login';
         $data['textButtonSubmit'] = lang('Text.log_in');
         $data['language'] = $this->request->getLocale();
+        $data['show_msg_success_activation'] = $this->request->getPostGet('show_msg_success_activation');
 
         return view('authentication/layout', $data);
     }
@@ -93,6 +85,7 @@ class Authentication extends BaseController
         $response = array();
         $response['error'] = '';
         $response['msg'] = '';
+        $response['resultSendEmail'] = '';
 
         $today = getdate();
         $formData = $this->request->getPost('post');
@@ -101,31 +94,32 @@ class Authentication extends BaseController
         $data['email'] = trim($formData['email']);
         $data['password'] = password_hash(trim($formData['password']), PASSWORD_DEFAULT);
         $data['token'] = md5(uniqid().$formData['email']);
-        $data['lang'] = $this->request->getLocale();
+        $data['language'] = $this->request->getLocale();
         $data['registrationDate'] = date('Y-m-d', $today[0]);
 
         $resultGetClient = $this->modelAuthentication->getClientBy('email', $data['email']);
 
         if(empty($resultGetClient))
         {
-            $resultCreate = $this->modelAuthentication->createRecord($data);
+            $resultCreate = $this->modelAuthentication->createClient($data);
 
             if($resultCreate['error'] == 0)
             {
                 $email = array();
-                $email['barner'] = 'MAITRE STAFF PLANNER';
                 $email['welcomeMsg'] = lang('Text.ac_welcome_msg');
                 $email['btnText'] = lang('Text.ac_text_btn_activate');
                 $email['footerMsg'] = lang('Text.ac_footer_msg');
+                $email['link'] = base_url('Authentication/activateAccount').'?token='.$data['token'].'&language='.$data['language'];
 
                 $this->email->setFrom('info@grupoahvsolucionesinformaticas.es', 'MAITRE STAFF PLANNER');
                 $this->email->setTo($formData['email']);
                 $this->email->setSubject('MAITRE STAFF PLANNER');
                 $this->email->setMessage(view('email/activateAccount', $email));
-                $this->email->send();
+                $resultSendEmail = $this->email->send();
 
                 $response['error'] = 0;
                 $response['msg'] = lang('Text.success_registration_msg');
+                $response['resultSendEmail'] = $resultSendEmail;
             }
             else
             {
@@ -140,6 +134,30 @@ class Authentication extends BaseController
         }
 
         return json_encode($response);
+    }
+
+    public function activateAccount()
+    {
+        $token = $this->request->getPostGet('token');
+
+        $data = array();
+        $data['pageTitle'] = lang('Text.error');
+        $data['language'] = $this->request->getLocale();
+
+        if(empty($token))
+            return view('errorPages/error', $data);
+
+        $result = $this->modelAuthentication->getClientBy('token', $token);
+
+        if(empty($result))
+            return view('errorPages/tokenEpired', $data);
+
+        $resulActivateAccountProcess = $this->modelAuthentication->activateAccountProcess($token);
+
+        if($resulActivateAccountProcess == true)
+            return redirect()->to(base_url('Authentication?language='.$data['language'].'&show_msg_success_activation=1'));
+        else
+            return view('errorPages/error', $data);
     }
    
 }

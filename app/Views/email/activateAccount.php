@@ -8,15 +8,9 @@
 <body>
     <div width="100%" >
         <div style="background: #fff; max-width: 700px; padding:50px 0;  margin: 0px auto; font-size: 14px">
-            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
-                <tbody>
-                    <tr>
-                        <td style="text-align:center; font-family: 'Courier New', Courier, monospace; font-size: 25px;">
-                            <?php echo $barner;?>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div style="background: #fff; font-family: 'Courier New', Courier, monospace;text-align: center; font-size: 12px; color: #b2b2b5; margin-top: 20px">
+                <img src="https://grupoahvsolucionesinformaticas.es/assets/images/auth-text.png" alt="" width="250px">
+            </div>
             <div style="padding: 40px; background: #fff;">
                 <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                     <tbody>
@@ -37,7 +31,7 @@
                         </tr>
                         <tr>
                             <td align="center">
-                                <a style="font-family: 'Courier New', Courier, monospace;cursor:pointer; color: #fff; background-color: #038edc;border-color: #038edc; display: inline-block; font-weight: 400; line-height: 1.5; text-align: center; text-decoration: none; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem;border-radius: 0.25rem;" href="#" ><?php echo $btnText;?></a>
+                                <a style="font-family: 'Courier New', Courier, monospace;cursor:pointer; color: #fff; background-color: #038edc;border-color: #038edc; display: inline-block; font-weight: 400; line-height: 1.5; text-align: center; text-decoration: none; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem;border-radius: 0.25rem;" href="<?php echo $link;?>" ><?php echo $btnText;?></a>
                             </td>
                         </tr>
                     </tbody>
@@ -45,9 +39,6 @@
             </div>
             <div style="background: #fff; font-family: 'Courier New', Courier, monospace;text-align: center; font-size: 12px; color: #b2b2b5; margin-top: 20px">
                 <?php echo $footerMsg;?>
-            </div>
-            <div style="background: #fff; font-family: 'Courier New', Courier, monospace;text-align: center; font-size: 12px; color: #b2b2b5; margin-top: 20px">
-                <img src="https://grupoahvsolucionesinformaticas.es/assets/images/auth-text.png" alt="" width="250px">
             </div>
         </div>
     </div>

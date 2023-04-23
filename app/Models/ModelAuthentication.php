@@ -27,7 +27,7 @@ class ModelAuthentication extends Model
         return $query->getResultArray();
     }
 
-    public function createRecord($data)
+    public function createClient($data)
     {
         $result = array();
 
@@ -45,6 +45,17 @@ class ModelAuthentication extends Model
         }
         
         return $result;
+    }
+
+    public function activateAccountProcess($token)
+    {
+        $data = array('token' => '', 'emailVerified' => '1');
+    
+        $query = $this->db->table('client')
+        ->where('token', $token)
+        ->update($data);
+
+        return $query;
     }
 
 }
